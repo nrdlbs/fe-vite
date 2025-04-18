@@ -5,11 +5,13 @@ import { routers } from "@/routes/routes";
 import "./assets/css/App.css";
 import mixpanel from 'mixpanel-browser'
 
-mixpanel.init(import.meta.env.VITE_MIXPANEL_TOKEN, {
-  track_pageview: true,
-  persistence: 'localStorage',
-  debug: false,
-})
+if (import.meta.env.NODE_ENV === 'production') {
+  mixpanel.init(import.meta.env.VITE_MIXPANEL_TOKEN, {
+    track_pageview: true,
+    persistence: 'localStorage',
+    debug: false,
+  })
+}
 
 function App() {
   return (
