@@ -3,6 +3,13 @@ import { CounterStoreProvider } from "@/provider/counterProvider";
 import { QueryProvider } from "@/provider/queryProvider";
 import { routers } from "@/routes/routes";
 import "./assets/css/App.css";
+import mixpanel from 'mixpanel-browser'
+
+mixpanel.init(import.meta.env.VITE_MIXPANEL_TOKEN, {
+  track_pageview: true,
+  persistence: 'localStorage',
+  debug: false,
+})
 
 function App() {
   return (
