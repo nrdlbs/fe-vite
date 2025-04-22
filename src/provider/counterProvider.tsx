@@ -1,41 +1,31 @@
-import { type ReactNode, createContext, useRef, useContext } from "react";
-import { useStore } from "zustand";
+import { type ReactNode, createContext, useRef, useContext } from 'react'
+import { useStore } from 'zustand'
 
-import { createCounterStore, initCounterStore } from "@/stores/counter";
-import { CounterStore } from "@/models/types";
+import { createCounterStore, initCounterStore } from '@/stores/counter'
+import { CounterStore } from '@/models/types'
 
-export const CounterStoreContext = createContext<CounterStoreApi | undefined>(
-  undefined
-);
+export const CounterStoreContext = createContext<CounterStoreApi | undefined>(undefined)
 
-export type CounterStoreApi = ReturnType<typeof createCounterStore>;
+export type CounterStoreApi = ReturnType<typeof createCounterStore>
 export interface CounterStoreProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
-export const CounterStoreProvider = ({
-  children,
-}: CounterStoreProviderProps) => {
-  const storeRef = useRef<CounterStoreApi>(null);
+export const CounterStoreProvider = ({ children }: CounterStoreProviderProps) => {
+  const storeRef = useRef<CounterStoreApi>(null)
   if (!storeRef.current) {
-    storeRef.current = createCounterStore(initCounterStore());
+    storeRef.current = createCounterStore(initCounterStore())
   }
 
-  return (
-    <CounterStoreContext.Provider value={storeRef.current}>
-      {children}
-    </CounterStoreContext.Provider>
-  );
-};
+  return <CounterStoreContext.Provider value={storeRef.current}>{children}</CounterStoreContext.Provider>
+}
 
-export const useCounterStore = <T,>(
-  selector: (store: CounterStore) => T
-): T => {
-  const counterStoreContext = useContext(CounterStoreContext);
+export const useCounterStore = <T,>(selector: (store: CounterStore) => T): T => {
+  const counterStoreContext = useContext(CounterStoreContext)
 
   if (!counterStoreContext) {
-    throw new Error(`useCounterStore must be used within CounterStoreProvider`);
+    throw new Error(`useCounterStore must be used within CounterStoreProvider`)
   }
 
-  return useStore(counterStoreContext, selector);
-};
+  return useStore(counterStoreContext, selector)
+}
