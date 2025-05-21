@@ -1,13 +1,13 @@
 import Example from '@/components/Example'
-import { Counter } from '@/components/Counter'
 import { Routes } from '@/models/types'
+import Home from '@/pages/Home'
 
 export const routers: Routes[] = [
   {
     href: '/',
     id: 'home',
     name: 'Home',
-    element: <Counter />,
+    element: <Home />,
   },
   {
     href: '/example',
