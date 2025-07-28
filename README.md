@@ -83,7 +83,7 @@ Config Playwright command in package.json when commit, you won't have to retype 
 
 ### Demo
 
-- Link demo: https://github.com/tienlevi/playwright-test/pull/41
+- Link demo: https://github.com/nrdlbs/fe-vite/pull/4
 - Explaining the demo link:
   - After initing and configuring Github actions, it will automatically create a Comment in PR showing the demo link and Snapshot UI (Only show snapshots by link)
   - After recommit, it will update snapshot in comment
