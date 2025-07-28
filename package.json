@@ -10,13 +10,14 @@
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,scss}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,scss}\"",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest watch",
     "prepare": "husky"
   },
   "dependencies": {
+    "@playwright/test": "^1.54.1",
     "@tanstack/react-query": "^5.67.3",
     "axios": "^1.8.3",
     "install": "^0.13.0",
