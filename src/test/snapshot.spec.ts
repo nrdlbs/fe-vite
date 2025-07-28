@@ -1,11 +1,8 @@
-import { test } from '@playwright/test'
-
-const baseLocal = 'http://localhost:5173'
-const path = '/'
+import { test, expect } from '@playwright/test'
 
 test('Screenshots', async ({ page }) => {
-  await page.goto(baseLocal + path, { waitUntil: 'networkidle' })
-
+  await page.goto('/', { waitUntil: 'networkidle' })
+  await expect(page).toHaveTitle(/.+/)
   await page.screenshot({
     path: 'public/screenshots/screenshot.png',
     fullPage: true,

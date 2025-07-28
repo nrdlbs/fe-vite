@@ -46,6 +46,8 @@ jobs:
           fi
 
       - name: Commit snapshot images to PR branch
+        env:
+        HEAD_REF: ${{ github.head_ref }}
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
@@ -54,7 +56,7 @@ jobs:
             echo "No new screenshots to commit"
           else
             git commit -m "Add Playwright snapshots"
-            git push origin ${{ github.head_ref }}
+            git push origin "$HEAD_REF"
           fi
 
       - name: Comment PR with snapshot images
@@ -70,8 +72,12 @@ jobs:
               return;
             }
 
-            const screenshotImage = files.find(file => file === 'screenshot.png')
-            const imageMarkdown = `![${screenshotImage}](https://raw.githubusercontent.com/${context.repo.owner}/${context.repo.repo}/${pr.head.ref}/public/screenshots/${screenshotImage})`
+            const screenshotImage = files.find(file => file === 'screenshot.png');
+            if (!screenshotImage) {
+              console.log("screenshot.png not found, skipping comment.");
+              return;
+            }
+            const imageMarkdown = `![${screenshotImage}](https://raw.githubusercontent.com/${context.repo.owner}/${context.repo.repo}/${pr.head.ref}/public/screenshots/${screenshotImage})`;
             const commentBody = `🧪 **Playwright Snapshot Previews:**\n\n${imageMarkdown}`
 
             // Get all comments on the PR
