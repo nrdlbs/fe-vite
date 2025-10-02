@@ -4,5 +4,5 @@ import { afterEach } from 'vitest'
 
 // Automatically cleanup after each test
 afterEach(() => {
-  cleanup()
+    cleanup()
 })
