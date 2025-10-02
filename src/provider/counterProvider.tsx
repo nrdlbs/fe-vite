@@ -8,24 +8,24 @@ export const CounterStoreContext = createContext<CounterStoreApi | undefined>(un
 
 export type CounterStoreApi = ReturnType<typeof createCounterStore>
 export interface CounterStoreProviderProps {
-  children: ReactNode
+    children: ReactNode
 }
 
 export const CounterStoreProvider = ({ children }: CounterStoreProviderProps) => {
-  const storeRef = useRef<CounterStoreApi>(null)
-  if (!storeRef.current) {
-    storeRef.current = createCounterStore(initCounterStore())
-  }
+    const storeRef = useRef<CounterStoreApi>(null)
+    if (!storeRef.current) {
+        storeRef.current = createCounterStore(initCounterStore())
+    }
 
-  return <CounterStoreContext.Provider value={storeRef.current}>{children}</CounterStoreContext.Provider>
+    return <CounterStoreContext.Provider value={storeRef.current}>{children}</CounterStoreContext.Provider>
 }
 
 export const useCounterStore = <T,>(selector: (store: CounterStore) => T): T => {
-  const counterStoreContext = useContext(CounterStoreContext)
+    const counterStoreContext = useContext(CounterStoreContext)
 
-  if (!counterStoreContext) {
-    throw new Error(`useCounterStore must be used within CounterStoreProvider`)
-  }
+    if (!counterStoreContext) {
+        throw new Error(`useCounterStore must be used within CounterStoreProvider`)
+    }
 
-  return useStore(counterStoreContext, selector)
+    return useStore(counterStoreContext, selector)
 }
