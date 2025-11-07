@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { CounterStoreProvider } from '@/provider/counterProvider'
 import { QueryProvider } from '@/provider/queryProvider'
 import { routers } from '@/routes/routes'
+import './assets/css/App.css'
 import mixpanel from 'mixpanel-browser'
 
 if (import.meta.env.NODE_ENV === 'production') {
